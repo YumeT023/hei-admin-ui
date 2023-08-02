@@ -27,7 +27,7 @@ export const StudentMenu = () => {
       </Box>
       <Box sx={{ pb: '10px', textAlign: 'center', bgcolor: '#2c393a', color: 'white' }}>
         <Button variant='text' endIcon={<LogoutIcon />} sx={{ color: 'white', border: '0px' }} onClick={logout}>
-          Déconnexion
+          Se déconnecter
         </Button>
       </Box>
     </Box>
