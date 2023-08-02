@@ -2,8 +2,7 @@ import { MultiLevelMenu, MenuItemCategory } from '@react-admin/ra-navigation'
 import { useNotify } from 'react-admin'
 import { Button , Box} from '@mui/material'
 
-import LogoutIcon from '@mui/icons-material/Logout'
-import { Receipt, AttachMoney, AccountCircle } from '@mui/icons-material'
+import { Receipt, AttachMoney, AccountCircle , Logout} from '@mui/icons-material'
 
 import authProvider from '../providers/authProvider'
 
@@ -25,7 +24,7 @@ export const StudentMenu = () => {
         </MultiLevelMenu>
       </Box>
       <Box sx={{ pb: '10px', textAlign: 'center', bgcolor: '#2c393a', color: 'white' }}>
-        <Button variant='text' endIcon={<LogoutIcon />} sx={{ color: 'white', border: '0px' }} onClick={logout}>
+        <Button variant='text' endIcon={<Logout />} sx={{ color: 'white', border: '0px' }} onClick={logout}>
           Se déconnecter
         </Button>
       </Box>
