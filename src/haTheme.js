@@ -19,6 +19,15 @@ export const mainTheme = createTheme({
     closedWidth: 1
   },
   components: {
+    RaSidebar: {
+      styleOverrides: {
+        root: {
+          '& .RaSidebar-fixed': {
+            height: '100vh'
+          }
+        }
+      }
+    },
     RaLayout: {
       styleOverrides: {
         root: {

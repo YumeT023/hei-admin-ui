@@ -6,7 +6,7 @@ import { MyBreadcrumb } from './MyBreadcrumb'
 
 const HaLayout = props => (
   <AppLocationContext>
-    <Layout {...props} appBar={() => (null)} menu={HaMenu} breadcrumb={MyBreadcrumb} />
+    <Layout {...props} appBar={() => null} menu={HaMenu} breadcrumb={MyBreadcrumb} />
   </AppLocationContext>
 )
 
