@@ -13,6 +13,20 @@ export const mainTheme = createTheme({
   typography: {
     fontFamily: ['Quicksand', 'sans-serif'].join(','),
     fontSize: 15
+  },
+  sidebar: {
+    width: 200, 
+    closedWidth: 1, 
+},
+  components: {
+    Layout:{
+          styleOverrides: {
+            root: {
+              margin_top: '0',
+            },
+          },
+       
+    }
   }
   //shadows: Array(25).fill('none')
 })
