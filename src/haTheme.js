@@ -19,10 +19,12 @@ export const mainTheme = createTheme({
     closedWidth: 1
   },
   components: {
-    Layout: {
+    RaLayout: {
       styleOverrides: {
         root: {
-          margin_top: '0'
+          '& .RaLayout-appFrame': {
+            marginTop: 0
+          }
         }
       }
     }
