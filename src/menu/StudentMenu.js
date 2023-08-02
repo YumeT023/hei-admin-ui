@@ -1,7 +1,6 @@
 import { MultiLevelMenu, MenuItemCategory } from '@react-admin/ra-navigation'
 import { useNotify } from 'react-admin'
-import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
+import { Button , Box} from '@mui/material'
 
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Receipt, AttachMoney, AccountCircle } from '@mui/icons-material'
