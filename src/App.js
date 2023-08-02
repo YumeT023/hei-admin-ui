@@ -22,7 +22,9 @@ import studentGrades from './operations/studentGrades'
 import MyLayout from './HaLayout'
 import HaLoginPage from './security/LoginPage'
 import { mainTheme } from './haTheme'
+
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
+
 const App = () => (
   <Admin
     title='HEI Admin'
