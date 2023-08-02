@@ -15,17 +15,16 @@ export const mainTheme = createTheme({
     fontSize: 15
   },
   sidebar: {
-    width: 200, 
-    closedWidth: 1, 
-},
+    width: 200,
+    closedWidth: 1
+  },
   components: {
-    Layout:{
-          styleOverrides: {
-            root: {
-              margin_top: '0',
-            },
-          },
-       
+    Layout: {
+      styleOverrides: {
+        root: {
+          margin_top: '0'
+        }
+      }
     }
   }
   //shadows: Array(25).fill('none')
