@@ -1,6 +1,8 @@
-import { Datagrid, FunctionField, ShowButton } from 'react-admin'
+import { Datagrid, FunctionField, ShowButton, TextField } from 'react-admin'
+import React from 'react'
 import { prettyPrintMoney, CustomDateField, commentFunctionRenderer } from '../utils'
 import rowStyle from './byStatusRowStyle'
+import { mainTheme } from '../../haTheme'
 
 export const FeesListItems = () => {
   return (
