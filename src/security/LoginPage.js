@@ -1,63 +1,31 @@
-import { Login } from 'react-admin'
-import { Card, CardContent, Grid, Typography, useMediaQuery, Modal, Box, Link } from '@mui/material'
-import { mainTheme } from '../haTheme'
-import { positions } from '@mui/system'
-import CompletePasswordPage from './CompletePasswordPage'
-import authProvider from '../providers/authProvider'
-import { useState } from 'react'
-import ForgotPassword from './ForgotPassword'
-import ConfirmForgotPassword from './ConfirmForgotPassword'
-
-const aCard = (title, subtitle, description1, description2, course) => {
-  const syllabus = 'https://drive.google.com/file/d/12Lc4o3jfQOFHIzazPToO2hnGZc8epU3I/view'
-  return (
-    <Card style={{ backgroundColor: '#ffffff', opacity: 0.9 }}>
-      <CardContent>
-        <Typography variant='h3' color='primary'>
-          {title}
-        </Typography>
-        <Typography variant='h5' color='primary'>
-          {subtitle}
-        </Typography>
-        <Typography variant='h7' color='initial'>
-          {description1}
-          <br />
-          {description2}
-        </Typography>
-        <Typography variant='h8' color='initial'>
-          <p>
-            Cours :{' '}
-            <a href={syllabus} style={{ color: '#000000' }}>
-              {course}
-            </a>
-          </p>
-        </Typography>
-      </CardContent>
-    </Card>
-  )
-}
+import { Login } from 'react-admin';
+import { Card, CardContent, Grid, Typography, useMediaQuery, Modal, Box, Link } from '@mui/material';
+import CompletePasswordPage from './CompletePasswordPage';
+import authProvider from '../providers/authProvider';
+import { useState } from 'react';
+import ForgotPassword from './ForgotPassword';
+import ConfirmForgotPassword from './ConfirmForgotPassword';
 
 const HaLoginPage = () => {
-  const [username, setUsername] = useState('')
-  const [openModal, setOpenModal] = useState(false)
-  const [confirm, setConfirm] = useState(true)
+  const [username, setUsername] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [confirm, setConfirm] = useState(true);
 
-  const displayFull = useMediaQuery('(min-width:1024px) and (min-height:768px)')
+  const displayFull = useMediaQuery('(min-width:1024px) and (min-height:768px)');
   const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 325,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
+    width: '400px',
+    height: '430px',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     margin: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    justifyItems: 'center'
-  }
+    padding: '40px',
+    borderRadius: '5px',
+    boxShadow: '0 0 10px #000',
+  };
+
   const ResponsiveLogin = () => {
     return (
       <Grid container xs={12}>
@@ -66,9 +34,8 @@ const HaLoginPage = () => {
           sx={{
             width: 'inherit',
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
-          position={'absolute'}
         >
           <Login backgroundImage={null} style={{ backgroundImage: 'inherit', position: 'relative' }} />
         </Grid>
@@ -78,43 +45,54 @@ const HaLoginPage = () => {
             width: 'inherit',
             display: 'flex',
             justifyContent: 'center',
-            bottom: 100
+            bottom: 100,
           }}
           position={'absolute'}
         >
-          <Link href='#/login' color='#FFFF' onClick={() => setOpenModal(true)} align='center'>
+          <Link href='#/login' color='#FFFFFF' onClick={() => setOpenModal(true)} align='center'>
             Mot de passe oublié?
           </Link>
         </Grid>
       </Grid>
-    )
-  }
-  const ResponsiveCompletePassword = () => <CompletePasswordPage style={{ backgroundImage: 'inherit' }} />
-  const PasswordChangeableLogin = () => (authProvider.isTemporaryPassword() ? <ResponsiveCompletePassword /> : <ResponsiveLogin />)
+    );
+  };
+
+  const ResponsiveCompletePassword = () => <CompletePasswordPage style={{ backgroundImage: 'inherit' }} />;
+  const PasswordChangeableLogin = () =>
+    authProvider.isTemporaryPassword() ? <ResponsiveCompletePassword /> : <ResponsiveLogin />;
 
   return (
     <div
       style={{
-        backgroundImage: 'url(/login-bg100k.jpg)',
+        backgroundImage: 'url(https://i.postimg.cc/8cnYLpfc/ddddd.jpg)',
         backgroundSize: 'cover',
         position: 'fixed',
         padding: '0',
         margin: '0',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Modal open={openModal} onClose={() => setOpenModal(false)}>
         <Box sx={style}>
-          {confirm ? (
-            <ConfirmForgotPassword username={username} setUsername={setUsername} setConfirm={setConfirm} />
-          ) : (
-            <ForgotPassword username={username} setOpenModal={setOpenModal} />
-          )}
+          <div className="form-box">
+            <div className="header-text">Login Form</div>
+            <input placeholder="Your Email Address" type="text" />
+            <input placeholder="Your Password" type="password" />
+            <input id="terms" type="checkbox" />
+            <label htmlFor="terms"></label>
+            <span>
+              Agree with <a href="#">Terms & Conditions</a>
+            </span>
+            <button>login</button>
+          </div>
         </Box>
       </Modal>
       {displayFull ? (
-        <Grid container spacing={2} style={{ paddingTop: '10%' }} theme={mainTheme}>
+        <Grid container spacing={2} style={{ paddingTop: '10%' }}>
           <Grid item xs={4}>
             <Typography variant='h3' align='center'>
               <div style={{ color: '#ffc107' }}>HEI</div>
@@ -128,19 +106,19 @@ const HaLoginPage = () => {
             <Grid container spacing={1}>
               <Grid item xs={1} />
               <Grid item xs={5}>
-                {aCard('0', "Coût à l'arrêt", 'Personne ne se connecte ?', 'Alors personne ne paie.', 'SYS-2')}
+                {/* Your card components here */}
               </Grid>
               <Grid item xs={4}>
-                {aCard('0', 'Vulnérabilité', 'Crashtest nous scanne,', 'mais ne trouve rien !', 'WEB-2')}
+                {/* Your card components here */}
               </Grid>
               <Grid item xs={2} />
 
               <Grid item xs={1} />
               <Grid item xs={5}>
-                {aCard('250,000,000', 'Utilisateurs', 'Onboarder tout Madagascar ?', 'Dix fois sans problème.', 'DONNEES-2')}
+                {/* Your card components here */}
               </Grid>
               <Grid item xs={4}>
-                {aCard('1', 'Seconde', 'Pire réponse de notre API', 'au percentile 97.', 'PROG-2')}
+                {/* Your card components here */}
               </Grid>
             </Grid>
           </Grid>
@@ -149,7 +127,7 @@ const HaLoginPage = () => {
         <PasswordChangeableLogin />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default HaLoginPage
+export default HaLoginPage;
