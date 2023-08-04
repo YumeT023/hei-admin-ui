@@ -32,7 +32,6 @@ export const mainTheme = createTheme({
           "& .RaDatagrid-tbody":{
             "& .RaDatagrid-row":{
               ":hover":{
-                backgroundColor: "#c9c7c1 !important",
               }
             },
           }
