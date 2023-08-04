@@ -16,7 +16,7 @@ import teachers from './operations/teachers'
 
 import fees from './operations/fees'
 import payments from './operations/payments'
-
+import transcripts from './operations/transcripts'
 import studentGrades from './operations/studentGrades'
 
 import MyLayout from './HaLayout'
@@ -25,6 +25,7 @@ import { mainTheme } from './haTheme'
 import transcripts from './operations/transcripts'
 import transcriptsVersions from './operations/transcriptsVersions'
 import claims from './operations/claims'
+
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
 
 const App = () => (
@@ -47,8 +48,6 @@ const App = () => (
 
     <Resource name='student-grades' {...studentGrades} />
     <Resource name='transcripts' {...transcripts} />
-    <Resource name='trancripts-versions' {...transcriptsVersions} />
-    <Resource name='claims' {...claims} />
 
     <CustomRoutes>
       <Route exact path='/profile' element={<profile.show />} />
