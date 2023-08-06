@@ -23,6 +23,7 @@ import MyLayout from './HaLayout'
 import HaLoginPage from './security/LoginPage'
 import { mainTheme } from './haTheme'
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
+
 const App = () => (
   <Admin
     title='HEI Admin'
@@ -33,6 +34,7 @@ const App = () => (
     layout={MyLayout}
     theme={mainTheme}
     requireAuth
+    theme={mainTheme}
   >
     <Resource name='profile' />
     <Resource name='students' {...students} />
