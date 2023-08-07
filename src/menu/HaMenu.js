@@ -4,6 +4,7 @@ import ManagerMenu from './ManagerMenu'
 import TeacherMenu from './TeacherMenu'
 import { WhoamiRoleEnum } from '../gen/haClient'
 import { Box, Stack, Button, Avatar, Typography } from '@mui/material'
+import { MultiLevelMenu as RaMenu } from '@react-admin/ra-navigation'
 import { Logout as LogoutIcon } from '@mui/icons-material'
 
 export const alpha = alpha => `rgb(240, 164, 8, ${alpha})`
@@ -24,6 +25,37 @@ const HaMenuHeader = () => (
   </Stack>
 )
 
+export const HaMenuListContainer = ({ children }) => (
+  <RaMenu
+    sx={{
+      '& .RaMultiLevelMenu-list': {
+        gap: '0.5rem'
+      },
+      '& .RaMenuItemCategory-container': {
+        padding: '0 !important',
+        bgcolor: 'transparent',
+        '& span': {
+          fontWeight: '700',
+          fontSize: '14px'
+        }
+      },
+      '& .RaMenuItemCategory-link': {
+        flexDirection: 'row !important',
+        gap: '1rem',
+        p: '8px',
+        borderRadius: '6px',
+        width: '100%',
+        '&.active, &:hover': {
+          bgcolor: '#FDEAC4',
+          color: '#F8BF4F'
+        }
+      }
+    }}
+  >
+    {children}
+  </RaMenu>
+)
+
 const HaMenuWrapper = ({ children }) => (
   <Box
     sx={{
@@ -37,7 +69,7 @@ const HaMenuWrapper = ({ children }) => (
       p: 1
     }}
   >
-    <Stack sx={{ height: '100%', p: 1.5, border: '1px solid #f7f7f7', borderRadius: 2, gap: 2 }}>
+    <Stack sx={{ height: '100%', p: 1.5, border: '1px solid #f7f7f7', borderRadius: 2, gap: 2, bgcolor: 'white' }}>
       <HaMenuHeader />
       {children}
     </Stack>
