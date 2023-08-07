@@ -14,13 +14,11 @@ export const StudentMenu = () => {
   const whoamiId = authProvider.getCachedWhoami().id
 
   return (
-    <Box sx={{ flex: 1 }}>
-      <MultiLevelMenu variant='categories' sx={{ width: '200px', backgroundColor: '#2c393a', color: 'white' }}>
+      <MultiLevelMenu variant='categories'>
         <MenuItemCategory to='/profile' name='profile' label='Mon profil' icon={<AccountCircle />} />
         <MenuItemCategory to={whoamiId ? `/students/${whoamiId}/fees` : '/'} name='fees' label='Frais' icon={<AttachMoney />} />
         <MenuItemCategory to='/' name='student-grades' label='Notes' icon={<Receipt />} onClick={notifyNotImplemented} />
       </MultiLevelMenu>
-    </Box>
   )
 }
 
