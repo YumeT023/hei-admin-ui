@@ -15,7 +15,7 @@ export const mainTheme = createTheme({
     fontSize: 15
   },
   sidebar: {
-    width: 250,
+    width: 275,
     closedWidth: 1
   },
   components: {
