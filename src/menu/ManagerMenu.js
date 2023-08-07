@@ -7,7 +7,8 @@ export const ManagerMenu = () => (
   <HaMenuListContainer variant='categories'>
     <Item to='/profile' name='profile' label='Mon profil' icon={<AccountCircleOutlined />} />
 
-    <Item to='/teachers' name='teachers' label='Enseignants' icon={<WorkOutlined />} />
+    <MenuItemCategory to='/teachers' name='teachers' label='Enseignants' icon={<Work />} />
+    <MenuItemCategory to='/transcripts' name='transcripts' label='Relever' icon={<GradingIcon />} />
 
     <Item name='students' label='Étudiants' icon={<SchoolOutlined />}>
       <CardContent>
