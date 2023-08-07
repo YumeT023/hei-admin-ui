@@ -9,10 +9,8 @@ import { pageSize, PrevNextPagination } from '../utils'
 const StudentList = () => {
   const role = authProvider.getCachedRole()
 
-  const LinkedText = ({studentId}) => {
-    return (
-      <Link to={`/students/${studentId}/transcripts/`}>Relevé de notes</Link>
-    )
+  const LinkedText = ({ studentId }) => {
+    return <Link to={`/students/${studentId}/transcripts/`}>Relevé de notes</Link>
   }
 
   return (
@@ -21,14 +19,12 @@ const StudentList = () => {
         <TextField source='ref' label='Référence' />
         <TextField source='first_name' label='Prénom·s' />
         <TextField source='last_name' label='Nom·s' />
-        <FunctionField label={'Relevé de notes'} render={(student) => <LinkedText studentId={student.id} />}/>
-        <ShowButton/>
+        <FunctionField label={'Relevé de notes'} render={student => <LinkedText studentId={student.id} />} />
+        <ShowButton />
         {role === WhoamiRoleEnum.Manager ? <EditButton /> : <ShowButton />}
       </Datagrid>
     </List>
   )
 }
-
-
 
 export default StudentList
