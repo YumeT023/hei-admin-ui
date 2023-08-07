@@ -7,7 +7,7 @@ import { Box, Button } from '@mui/material'
 import { Logout as LogoutIcon } from '@mui/icons-material'
 
 const Logout = () => (
-  <Box sx={{ textAlign: 'center', bgcolor: '#2c393a', color: 'white' }}>
+  <Box sx={{ textAlign: 'center', bgcolor: '#2c393a', color: 'white' , pb: '20px' }}>
     <Button variant='text' endIcon={<LogoutIcon />} sx={{ color: 'white', border: '0px' }} onClick={authProvider.logout}>
       Se déconnecter
     </Button>
@@ -20,7 +20,11 @@ const HaMenuWrapper = ({ children }) => (
       height: '100vh',
       justifyContent: 'space-between',
       flexDirection: 'column',
-      display: 'flex'
+      display: 'flex',
+      width: '200px',
+      backgroundColor: '#2c393a',
+      color: 'white',
+      flex:'1'
     }}
   >
     {children}
@@ -43,7 +47,9 @@ const Menu = ({ role }) => {
 
 const HaMenu = () => (
   <HaMenuWrapper>
-    <Menu role={authProvider.getCachedWhoami().role} />
+    <Box>
+      <Menu role={authProvider.getCachedWhoami().role} />
+    </Box>
   </HaMenuWrapper>
 )
 
