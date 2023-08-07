@@ -23,10 +23,10 @@ export const mainTheme = createTheme({
       styleOverrides: {
         root: {
           "& .RaDatagrid-headerCell": {
-            backgroundColor: "#1D5D9B",
+            backgroundColor: "#2c393a",
             color: "white",
             "& :hover": {
-              backgroundColor: "#1D5D9B",
+              color:"#c7c6c5"
             }
           },
           "& .RaDatagrid-tbody": {

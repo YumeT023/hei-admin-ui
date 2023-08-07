@@ -22,6 +22,7 @@ import studentGrades from './operations/studentGrades'
 import MyLayout from './HaLayout'
 import HaLoginPage from './security/LoginPage'
 import { mainTheme } from './haTheme'
+import { Transcript } from './operations/TranscriptList'
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
 
 const App = () => (
@@ -34,7 +35,6 @@ const App = () => (
     layout={MyLayout}
     theme={mainTheme}
     requireAuth
-    theme={mainTheme}
   >
     <Resource name='profile' />
     <Resource name='students' {...students} />
@@ -47,6 +47,7 @@ const App = () => (
 
     <CustomRoutes>
       <Route exact path='/profile' element={<profile.show />} />
+      <Route exact path='/transcripts' element={<Transcript.List />} />
 
       <Route exact path='/students/:studentId/fees' element={<fees.list />} />
       <Route

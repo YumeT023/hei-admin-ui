@@ -1,6 +1,6 @@
 import { MultiLevelMenu, MenuItemCategory, MenuItemList, MenuItemNode } from '@react-admin/ra-navigation'
 import { CardContent, Typography } from '@mui/material'
-
+import GradingIcon from '@mui/icons-material/Grading';
 import { AccountCircle, School, People, Work, Warning } from '@mui/icons-material'
 
 export const ManagerMenu = () => (
@@ -8,6 +8,7 @@ export const ManagerMenu = () => (
     <MenuItemCategory to='/profile' name='profile' label='Mon profil' icon={<AccountCircle />} />
 
     <MenuItemCategory to='/teachers' name='teachers' label='Enseignants' icon={<Work />} />
+    <MenuItemCategory to='/transcripts ' name='transcripts' label='Relever' icon={<GradingIcon />} />
 
     <MenuItemCategory name='students' label='Étudiants' icon={<School />}>
       <CardContent>

@@ -39,6 +39,11 @@ export const MyBreadcrumb = () => {
         <BreadcrumbItem name='create' label='créer' />
       </BreadcrumbItem>
       <BreadcrumbItem name='profile' label='Profiles' />
+      <BreadcrumbItem name='transcript' label='transcripts'>
+        <BreadcrumbItem name='edit' label={takeRefFunction} />
+        <BreadcrumbItem name='show' label={takeRefFunction} />
+        <BreadcrumbItem name='create' label='créer' />
+      </BreadcrumbItem>
     </Breadcrumb>
   )
 }
