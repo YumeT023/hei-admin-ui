@@ -1,9 +1,10 @@
-import { Form , RadioButtonGroupInput, Edit , SaveButton} from 'react-admin'
+import { Form, RadioButtonGroupInput, Edit, SaveButton, Toolbar } from 'react-admin'
 
 import { SexRadioButton, EditToolBar, TurnsStringIntoDate } from '../utils'
 import Input from '../utils/Input'
 
-import {Box } from '@mui/material'
+import { Box } from '@mui/material'
+import { Save } from '../utils/Save'
 
 const StatusRadioButton = () => (
   <RadioButtonGroupInput
@@ -15,6 +16,7 @@ const StatusRadioButton = () => (
     ]}
   />
 )
+
 const transformUser = user => {
   let regex = /\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.\d\d\dZ/i // format 2023-02-28T21:00:00.00Z
   let regex2 = /\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\Z/i // 2023-02-28T21:00:00Z
@@ -41,19 +43,7 @@ const ProfileEdit = () => (
           <Input source='entrance_datetime' label='' placeholder="Date d'entrée chez HEI" type='date' />
           <Input source='ref' placeholder='Référence' />
           <StatusRadioButton />
-          <SaveButton
-            sx={{
-              margin: '100px 0px 30px 120px',
-              bgcolor: '#FDEAC4',
-              borderRadius: '50px',
-              boxShadow: 'none',
-              color: '#F8BF4F',
-              '&:hover': {
-                bgcolor: '#FDEAC4',
-                boxShadow: 'none'
-              }
-            }}
-          />
+          <Save />
         </Box>
       </Box>
     </Form>
