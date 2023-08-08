@@ -26,6 +26,7 @@ describe(specTitle('Transcripts'), () => {
     }).as('getManager1')
     cy.intercept('GET', `/students?page=1&page_size=10`, studentsMock).as('getStudentsPage1')
     cy.intercept('GET', `/students?page=2&page_size=10`, studentsMock).as('getStudentsPage2')
+
     cy.get('#username').type(manager1.username)
     cy.get('#password').type(manager1.password)
     cy.get('button').contains('Connexion').click()
@@ -55,21 +56,24 @@ describe(specTitle('Transcripts'), () => {
     cy.intercept('GET', `/students/${student1Mock.id}/transcripts?page=1&page_size=10`, transcriptsMock).as('getTranscripts')
 
     cy.get(':nth-child(1) > :nth-child(4) > .MuiTypography-body2 > .MuiTypography-root').click()
+
     cy.wait('@getTranscripts')
+   // cy.wait('@getTranscriptsVersions')
 
     cy.get('body')
     cy.contains('Semestre')
     cy.contains('Année académique')
 
-    cy.intercept('GET', `/students/${student1Mock.id}/transcripts/${transcript1Mock.id}`, transcript1Mock).as('getTranscriptById')
-    cy.intercept('GET', `/students/${student1Mock.id}/transcripts/${transcript1Mock.id}/versions?page=1&page_size=10`, transcriptsVersionMock).as(
-      'getTranscriptVersions'
-    )
 
+    cy.intercept('GET', `/students/${student1Mock.id}/transcripts/${transcript1Mock.id}`, transcript1Mock).as('getTranscriptById')
+    
     cy.get('.RaDatagrid-rowEven > :nth-child(5) > .MuiButtonBase-root').click()
+
+    cy.intercept(`/students/student1_id/transcripts/transcript1_id/versions?page=1&page_size=10`, transcriptsVersionMock).as('getTranscriptsVersions')
 
     cy.wait('@getTranscriptById')
     cy.wait('@getTranscriptVersions')
+
 
     cy.contains(transcript1Mock.semester)
     cy.contains(transcript1Mock.academic_year)

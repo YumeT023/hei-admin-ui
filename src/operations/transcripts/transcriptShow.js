@@ -4,7 +4,7 @@ import transcriptsVersionsProvider from '../../providers/transcriptsVersionsProv
 import { useParams } from 'react-router-dom'
 const TranscriptShow = () => {
   const [versions, setVersions] = useState([])
-  const [claims, setClaims] = useState([])
+  // const [claims, setClaims] = useState([])
 
   const { studentId, transcriptId } = useParams()
 
@@ -13,10 +13,9 @@ const TranscriptShow = () => {
       const versionsData = await transcriptsVersionsProvider.getList(studentId, transcriptId, 1, 10)
       setVersions(versionsData)
     }
-    effect()
-  }, [])
+    effect().then(r => console.log(r))
+  }, [studentId, transcriptId])
 
-  //npx prettier --check "src/**/*.{js,ts,tsx}" "./**/*.{json,yml,yaml}"
 
   return (
     <>
@@ -27,13 +26,13 @@ const TranscriptShow = () => {
           <TextField source={'creation_datetime'} label={'Date de création'} />
         </SimpleShowLayout>
         <div>
-          {versions.length > 0 && (
+          {versions.length === 0 ? "Pas de données" : (
             <div>
               {versions.map(record => (
                 <>
                   <span>{record.id}</span>
                   <span>{record.transcript_id}</span>
-                  <span>{record.created_by_user_id}</span>t
+                  <span>{record.created_by_user_id}</span>
                 </>
               ))}
             </div>
