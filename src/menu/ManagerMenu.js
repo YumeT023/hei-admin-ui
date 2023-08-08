@@ -1,14 +1,14 @@
 import { MenuItemCategory as Item } from '@react-admin/ra-navigation'
-import { CardContent, Typography } from '@mui/material'
+import { CardContent, Typography} from '@mui/material'
 import { AccountCircleOutlined, SchoolOutlined, PeopleOutlined, WorkOutlined, WarningOutlined } from '@mui/icons-material'
 import { HaMenuListContainer } from './HaMenu'
+import { AccountCircle, School, People, Work, Warning } from '@mui/icons-material'
 
 export const ManagerMenu = () => (
   <HaMenuListContainer variant='categories'>
     <Item to='/profile' name='profile' label='Mon profil' icon={<AccountCircleOutlined />} />
 
-    <MenuItemCategory to='/teachers' name='teachers' label='Enseignants' icon={<Work />} />
-    <MenuItemCategory to='/transcripts' name='transcripts' label='Relever' icon={<GradingIcon />} />
+    <Item to='/teachers' name='teachers' label='Enseignants' icon={<Work />} />
 
     <Item name='students' label='Étudiants' icon={<SchoolOutlined />}>
       <CardContent>

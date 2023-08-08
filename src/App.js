@@ -42,12 +42,12 @@ const App = () => (
 
     <Resource name='fees' {...fees} />
     <Resource name='payments' {...payments} />
-
+    <Resource name='notes' {...Transcript}/>
     <Resource name='student-grades' {...studentGrades} />
 
     <CustomRoutes>
       <Route exact path='/profile' element={<profile.show />} />
-      <Route exact path='/transcripts' element={<Transcript.List />} />
+      <Route exact path='/notes' element={<Transcript.list />} />
 
       <Route exact path='/students/:studentId/fees' element={<fees.list />} />
       <Route
