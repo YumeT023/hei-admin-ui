@@ -1,5 +1,9 @@
-import { Create, SimpleForm, TextInput, DateInput } from 'react-admin'
+import { Create, Form, SaveButton } from 'react-admin'
 import { SexRadioButton, TurnsStringIntoDate } from '../utils'
+import Input from '../utils/Input'
+
+import { Box } from '@mui/material'
+import { Save } from '../utils/Save'
 
 const transformTeacher = teacher => {
   teacher.entrance_datetime = TurnsStringIntoDate(teacher.entrance_datetime)
@@ -7,17 +11,26 @@ const transformTeacher = teacher => {
 }
 const TeacherCreate = () => (
   <Create title='Enseignants' transform={transformTeacher}>
-    <SimpleForm>
-      <TextInput source='ref' label='Référence' fullWidth={true} />
-      <TextInput source='first_name' label='Prénoms' fullWidth={true} />
-      <TextInput source='last_name' label='Nom' fullWidth={true} />
-      <SexRadioButton />
-      <TextInput source='phone' label='Téléphone' fullWidth={true} />
-      <DateInput source='birth_date' label='Date de naissance' fullWidth={true} />
-      <TextInput multiline source='address' label='Adresse' fullWidth={true} />
-      <TextInput source='email' label='Email' fullWidth={true} />
-      <DateInput source='entrance_datetime' label="Date d'entrée chez HEI" fullWidth={true} />
-    </SimpleForm>
+    <Form>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mt: '30px' }}>
+        <Box sx={{ ml: '150px' }}>
+          <Input source='last_name' placeholder='Nom' />
+          <Input source='first_name' placeholder='Prénoms' />
+          <Input source='birth_date' placeholder='Date de naissance' type='date' />
+          <Input multiline source='address' placeholder='Adresse' />
+          <SexRadioButton />
+        </Box>
+        <Box sx={{ ml: '70px' }}>
+          <Input source='ref' placeholder='Référence' />
+
+          <Input source='phone' placeholder='Téléphone' />
+
+          <Input source='email' placeholder='Email' />
+          <Input source='entrance_datetime' placeholder="Date d'entrée chez HEI" type='date' />
+          <Save />
+        </Box>
+      </Box>
+    </Form>
   </Create>
 )
 export default TeacherCreate
