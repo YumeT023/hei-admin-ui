@@ -3,28 +3,76 @@ import StudentMenu from './StudentMenu'
 import ManagerMenu from './ManagerMenu'
 import TeacherMenu from './TeacherMenu'
 import { WhoamiRoleEnum } from '../gen/haClient'
-import { Box, Button } from '@mui/material'
+import { Box, Stack, Button, Avatar, Typography } from '@mui/material'
+import { MultiLevelMenu as RaMenu } from '@react-admin/ra-navigation'
 import { Logout as LogoutIcon } from '@mui/icons-material'
 
+export const alpha = alpha => `rgb(240, 164, 8, ${alpha})`
+
+// TODO: find a better place where to put this
 const Logout = () => (
-  <Box sx={{ textAlign: 'center', bgcolor: '#2c393a', color: 'white' }}>
-    <Button variant='text' endIcon={<LogoutIcon />} sx={{ color: 'white', border: '0px' }} onClick={authProvider.logout}>
+  <Box sx={{ textAlign: 'center', color: 'white', pb: '20px' }}>
+    <Button variant='text' endIcon={<LogoutIcon />} sx={{ color: 'white' }} onClick={authProvider.logout}>
       Se déconnecter
     </Button>
   </Box>
+)
+
+const HaMenuHeader = () => (
+  <Stack direction='row' alignItems='center' gap={1.5}>
+    <Avatar variant='rounded' sx={{ bgcolor: 'rgb(252, 175, 59)' }} />
+    <Typography component='b'>HEI Admin</Typography>
+  </Stack>
+)
+
+export const HaMenuListContainer = ({ children }) => (
+  <RaMenu
+    sx={{
+      '& .RaMultiLevelMenu-list': {
+        gap: '0.5rem'
+      },
+      '& .RaMenuItemCategory-container': {
+        padding: '0 !important',
+        bgcolor: 'transparent',
+        '& span': {
+          fontWeight: '700',
+          fontSize: '14px'
+        }
+      },
+      '& .RaMenuItemCategory-link': {
+        flexDirection: 'row !important',
+        gap: '1rem',
+        p: '8px',
+        borderRadius: '6px',
+        width: '100%',
+        '&.active, &:hover': {
+          bgcolor: '#FDEAC4',
+          color: '#F8BF4F'
+        }
+      }
+    }}
+  >
+    {children}
+  </RaMenu>
 )
 
 const HaMenuWrapper = ({ children }) => (
   <Box
     sx={{
       height: '100vh',
+      borderRadius: '8px',
       justifyContent: 'space-between',
       flexDirection: 'column',
-      display: 'flex'
+      display: 'flex',
+      width: '300px',
+      flex: '1',
+      p: 1
     }}
   >
-    {children}
-    <Logout />
+    <Stack sx={{ height: '100%', p: 1.5, border: '1px solid #f7f7f7', borderRadius: 2, gap: 2, bgcolor: 'white' }}>
+      <HaMenuHeader />
+      {children}
+    </Stack>
   </Box>
 )
 
@@ -43,7 +91,9 @@ const Menu = ({ role }) => {
 
 const HaMenu = () => (
   <HaMenuWrapper>
-    <Menu role={authProvider.getCachedWhoami().role} />
+    <Box>
+      <Menu role={authProvider.getCachedWhoami().role} />
+    </Box>
   </HaMenuWrapper>
 )
 
