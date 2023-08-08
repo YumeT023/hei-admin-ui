@@ -1,45 +1,54 @@
-import { Show, SimpleShowLayout, TextField } from 'react-admin'
+import { Show, SimpleShowLayout, TextField, useShowContext } from 'react-admin'
 import { useEffect, useState } from 'react'
 import transcriptsVersionsProvider from '../../providers/transcriptsVersionsProvider'
-import { useParams } from 'react-router-dom'
-const TranscriptShow = () => {
-  const [versions, setVersions] = useState([])
-  // const [claims, setClaims] = useState([])
+import { toApiIds } from '../../providers/transcriptsProvider'
 
-  const { studentId, transcriptId } = useParams()
+// nb: notice how i separate this from the main Transcript details
+// not only i can access the ShowContext (which contains the record, ... everything)
+// but the responsibilities is also well defined
+const TranscriptVersions = () => {
+  const [versions, setVersions] = useState([])
+  const { record } = useShowContext()
+  const { studentId, transcriptId } = toApiIds(record.id)
 
   useEffect(() => {
-    const effect = async () => {
+    const doFetch = async () => {
       const versionsData = await transcriptsVersionsProvider.getList(studentId, transcriptId, 1, 10)
       setVersions(versionsData)
     }
-    effect().then(r => console.log(r))
+    doFetch()
   }, [studentId, transcriptId])
 
-
   return (
-    <>
-      <Show resource={'transcripts'} title={'Transcript'}>
-        <SimpleShowLayout>
-          <TextField source={'semester'} label={'Semestre'} />
-          <TextField source={'academic_year'} label={'Année académique'} />
-          <TextField source={'creation_datetime'} label={'Date de création'} />
-        </SimpleShowLayout>
+    <div>
+      {versions.length === 0 ? (
+        'Pas de données'
+      ) : (
         <div>
-          {versions.length === 0 ? "Pas de données" : (
-            <div>
-              {versions.map(record => (
-                <>
-                  <span>{record.id}</span>
-                  <span>{record.transcript_id}</span>
-                  <span>{record.created_by_user_id}</span>
-                </>
-              ))}
-            </div>
-          )}
+          {versions.map(record => (
+            <>
+              <span>{record.id}</span>
+              <span>{record.transcript_id}</span>
+              <span>{record.created_by_user_id}</span>
+            </>
+          ))}
         </div>
-      </Show>
-    </>
+      )}
+    </div>
+  )
+}
+
+const TranscriptShow = () => {
+  return (
+    <Show resource={'transcripts'} title={'Transcript'}>
+      <SimpleShowLayout>
+        <TextField source={'semester'} label={'Semestre'} />
+        <TextField source={'academic_year'} label={'Année académique'} />
+        <TextField source={'creation_datetime'} label={'Date de création'} />
+      </SimpleShowLayout>
+
+      <TranscriptVersions />
+    </Show>
   )
 }
 

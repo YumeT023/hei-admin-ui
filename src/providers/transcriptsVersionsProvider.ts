@@ -11,7 +11,7 @@ const transcriptsVersionsProvider = {
     return result.data
   },
 
-  saveOrUpdate() {}
+  saveOrUpdate() { }
 }
 
 export default transcriptsVersionsProvider

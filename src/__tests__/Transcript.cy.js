@@ -54,26 +54,22 @@ describe(specTitle('Transcripts'), () => {
   it('can details each transcript', () => {
     cy.get('body')
     cy.intercept('GET', `/students/${student1Mock.id}/transcripts?page=1&page_size=10`, transcriptsMock).as('getTranscripts')
+    cy.intercept('GET', `/students/${student1Mock.id}/transcripts/${transcript1Mock.id}`, transcript1Mock).as('getTranscriptById')
+    cy.intercept('GET', `/students/${student1Mock.id}/transcripts/${transcript1Mock.id}/versions?page=1&page_size=10`, transcriptsVersionMock).as(
+      'getTranscriptsVersions'
+    )
 
     cy.get(':nth-child(1) > :nth-child(4) > .MuiTypography-body2 > .MuiTypography-root').click()
 
     cy.wait('@getTranscripts')
-   // cy.wait('@getTranscriptsVersions')
 
     cy.get('body')
     cy.contains('Semestre')
     cy.contains('Année académique')
 
-
-    cy.intercept('GET', `/students/${student1Mock.id}/transcripts/${transcript1Mock.id}`, transcript1Mock).as('getTranscriptById')
-    
     cy.get('.RaDatagrid-rowEven > :nth-child(5) > .MuiButtonBase-root').click()
 
-    cy.intercept(`/students/student1_id/transcripts/transcript1_id/versions?page=1&page_size=10`, transcriptsVersionMock).as('getTranscriptsVersions')
-
-    cy.wait('@getTranscriptById')
-    cy.wait('@getTranscriptVersions')
-
+    cy.wait('@getTranscriptsVersions')
 
     cy.contains(transcript1Mock.semester)
     cy.contains(transcript1Mock.academic_year)
