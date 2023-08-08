@@ -45,13 +45,12 @@ const ProfileEdit = () => (
           <SaveButton
             sx={{
               margin: '100px 0px 30px 120px',
-              height: '50px',
-              bgcolor: '#F8BF4F',
+              bgcolor: '#FDEAC4',
               borderRadius: '50px',
               boxShadow: 'none',
-              color: 'black',
+              color: '#F8BF4F',
               '&:hover': {
-                bgcolor: '#F8BF4F',
+                bgcolor: '#FDEAC4',
                 boxShadow: 'none'
               }
             }}
