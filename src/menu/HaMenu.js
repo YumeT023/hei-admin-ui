@@ -64,7 +64,7 @@ const HaMenuWrapper = ({ children }) => (
       justifyContent: 'space-between',
       flexDirection: 'column',
       display: 'flex',
-      width: '275px',
+      width: '300px',
       flex: '1',
       p: 1
     }}
