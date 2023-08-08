@@ -1,7 +1,8 @@
-import { Show, SimpleShowLayout, TextField, useShowContext } from 'react-admin'
+import { Show, SimpleShowLayout, TextField, useShowContext, List, Datagrid } from 'react-admin'
 import { useEffect, useState } from 'react'
 import transcriptsVersionsProvider from '../../providers/transcriptsVersionsProvider'
 import { toApiIds } from '../../providers/transcriptsProvider'
+
 
 // nb: notice how i separate this from the main Transcript details
 // not only i can access the ShowContext (which contains the record, ... everything)
@@ -21,7 +22,7 @@ const TranscriptVersions = () => {
 
   return (
     <div>
-      {versions.length === 0 ? (
+      {/*versions.length === 0 ? (
         'Pas de données'
       ) : (
         <div>
@@ -33,7 +34,16 @@ const TranscriptVersions = () => {
             </>
           ))}
         </div>
-      )}
+          )*/}
+
+              <List>
+              <Datagrid data={versions}>
+                <TextField source="id" />
+                <TextField source="transcript_id" />
+                <TextField source="created_by_user_id" />
+              </Datagrid>
+              </List>        
+
     </div>
   )
 }
@@ -51,5 +61,6 @@ const TranscriptShow = () => {
     </Show>
   )
 }
+
 
 export default TranscriptShow
