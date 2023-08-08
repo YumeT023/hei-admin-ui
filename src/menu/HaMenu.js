@@ -6,8 +6,7 @@ import { WhoamiRoleEnum } from '../gen/haClient'
 import { Box, Stack, Button, Avatar, Typography } from '@mui/material'
 import { MultiLevelMenu as RaMenu } from '@react-admin/ra-navigation'
 import { Logout as LogoutIcon } from '@mui/icons-material'
-
-export const alpha = alpha => `rgb(240, 164, 8, ${alpha})`
+import { Color } from '../utils/color'
 
 // TODO: find a better place where to put this
 const Logout = () => (
@@ -20,7 +19,7 @@ const Logout = () => (
 
 const HaMenuHeader = () => (
   <Stack direction='row' alignItems='center' gap={1.5}>
-    <Avatar variant='rounded' sx={{ bgcolor: 'rgb(252, 175, 59)' }} />
+    <Avatar variant='rounded' sx={{ bgcolor: Color['500'] }} />
     <Typography component='b'>HEI Admin</Typography>
   </Stack>
 )
@@ -46,8 +45,8 @@ export const HaMenuListContainer = ({ children }) => (
         borderRadius: '6px',
         width: '100%',
         '&.active, &:hover': {
-          bgcolor: '#FDEAC4',
-          color: '#F8BF4F'
+          bgcolor: Color['100'],
+          color: Color['500']
         }
       }
     }}
