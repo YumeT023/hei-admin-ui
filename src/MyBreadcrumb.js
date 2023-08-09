@@ -32,13 +32,13 @@ export const MyBreadcrumb = () => {
         <BreadcrumbItem name='show' label={takeRefFunction} />
         <BreadcrumbItem name='create' label='créer' />
       </BreadcrumbItem>
-      <BreadcrumbItem name='profile' label='Profiles' />
+      <BreadcrumbItem name='profile' label='Profile' />
       <BreadcrumbItem name='fees' label='Frais'>
         <BreadcrumbItem name='edit' label={takeRefFunction} />
         <BreadcrumbItem name='show' label={takeRefFunction} />
         <BreadcrumbItem name='create' label='créer' />
       </BreadcrumbItem>
-      <BreadcrumbItem name='profile' label='Profiles' />
+      <BreadcrumbItem name='notes' label={'Notes'} />
     </Breadcrumb>
   )
 }
