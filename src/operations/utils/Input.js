@@ -6,7 +6,7 @@ export const Input = props => {
 
   return (
     <Box>
-      <Typography sx={{ fontWeight: 'bold' , fontSize:'15px' }}>{placeholder}</Typography>
+      <Typography sx={{ fontWeight: 'bold', fontSize: '15px' }}>{placeholder}</Typography>
       <TextInput
         source={source}
         placeholder={placeholder}
@@ -16,16 +16,17 @@ export const Input = props => {
         name={name}
         disabled={disabled}
         validate={validate}
-        sx={{ width: '300px', height: '50px' , 
-      '& .css-146qo9o-MuiInputBase-root-MuiOutlinedInput-root':{
-        height:'40px'
-      },
-      '& .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input':{
-        fontSize:'15px'
-      }
-      }}
+        sx={{
+          width: '300px',
+          height: '50px',
+          '& .css-146qo9o-MuiInputBase-root-MuiOutlinedInput-root': {
+            height: '40px'
+          },
+          '& .css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input': {
+            fontSize: '15px'
+          }
+        }}
       />
     </Box>
   )
 }
-

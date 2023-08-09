@@ -1,5 +1,5 @@
 import { Create, Form } from 'react-admin'
-import { SexRadioButton, TurnsStringIntoDate , Save , Input} from '../utils'
+import { SexRadioButton, TurnsStringIntoDate, Save, Input } from '../utils'
 
 import { Box } from '@mui/material'
 
@@ -8,9 +8,9 @@ const transformTeacher = teacher => {
   return teacher
 }
 const TeacherCreate = () => (
-  <Create title='Enseignants' transform={transformTeacher} sx={{boxShadow:'none',height:'100vh'}}>
+  <Create title='Enseignants' transform={transformTeacher} sx={{ boxShadow: 'none', height: '100vh' }}>
     <Form>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mt: '30px',ml:'200px'}}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mt: '30px', ml: '200px' }}>
         <Box>
           <Input source='last_name' placeholder='Nom' />
           <Input source='first_name' placeholder='Prénoms' />

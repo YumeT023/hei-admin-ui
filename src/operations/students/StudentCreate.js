@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Create, Form } from 'react-admin'
 import { FeeSimpleFormContent } from '../fees/FeesCreate'
-import { SexRadioButton, TurnsStringIntoDate , Input, Save, BoolInput } from '../utils'
+import { SexRadioButton, TurnsStringIntoDate, Input, Save, BoolInput } from '../utils'
 import { createFees } from './utils'
 
 import { Box } from '@mui/material'

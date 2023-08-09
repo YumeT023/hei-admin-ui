@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
-import { BooleanInput, Create, maxValue, minValue, number, RadioButtonGroupInput, SelectInput, required, SimpleForm, useDataProvider } from 'react-admin'
+import { Create, maxValue, minValue, number, RadioButtonGroupInput, SelectInput, required, SimpleForm, useDataProvider } from 'react-admin'
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { manualFeeTypes, predefinedFeeTypes, predefinedFirstDueDates } from '../../conf'
-import { commentRenderer } from '../utils'
-import Input from '../utils/Input'
-
+import { Input, commentRenderer, BoolInput } from '../utils'
 import { Box, Typography } from '@mui/material'
-import { BoolInput } from '../utils/BooleanCustom'
 
 const commonStyleSelect = {
   width: '50px',
