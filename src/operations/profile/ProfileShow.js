@@ -1,7 +1,10 @@
-import { EmailField, FunctionField, SimpleShowLayout, Show, TextField } from 'react-admin'
-import { Link } from '@mui/material'
-import authProvider from '../../providers/authProvider'
-import { unexpectedValue, CustomDateField } from '../utils'
+import { Show } from 'react-admin';
+import { Link, Typography } from '@mui/material';
+import authProvider from '../../providers/authProvider';
+import { unexpectedValue, CustomDateField } from '../utils';
+import { SimpleShowLayout, TextField, FunctionField, EmailField } from 'react-admin';
+
+
 
 export const ProfileLayout = () => {
   const sexRenderer = user => {
@@ -16,18 +19,23 @@ export const ProfileLayout = () => {
   }
   const phoneRenderer = data => <Link href={`tel:${data.phone}`}>{data.phone}</Link>
   return (
-    <SimpleShowLayout>
-      <TextField source='ref' label='Référence' />
-      <TextField source='first_name' id='first_name' label='Prénom(s)' />
-      <TextField source='last_name' label='Nom(s)' />
-      <FunctionField label='Sexe' render={sexRenderer} />
-      <FunctionField label='Téléphone' render={phoneRenderer} />
-      <CustomDateField source='birth_date' label='Date de naissance' showTime={false} />
-      <TextField source='address' label='Adresse' component='pre' />
-      <EmailField source='email' label='Email' />
-      <CustomDateField source='entrance_datetime' label="Date d'entrée chez HEI" showTime={false} />
-      <FunctionField label='Statut' render={statusRenderer} />
-    </SimpleShowLayout>
+    <>
+      <Typography variant="h4" gutterBottom className="MuiTypography-infoTitle" style={{ paddingLeft: '7vh', paddingTop: '3vh' }}>
+  Information générale
+</Typography>
+      <SimpleShowLayout>
+        <TextField source='ref' label='Référence' />
+        <TextField source='first_name' id='first_name' label='Prénom(s)' />
+        <TextField source='last_name' label='Nom(s)' />
+        <FunctionField label='Sexe' render={sexRenderer} />
+        <FunctionField label='Téléphone' render={phoneRenderer} />
+        <CustomDateField source='birth_date' label='Date de naissance' showTime={false} />
+        <TextField source='address' label='Adresse' component='pre' />
+        <EmailField source='email' label='Email' />
+        <CustomDateField source='entrance_datetime' label="Date d'entrée chez HEI" showTime={false} />
+        <FunctionField label='Statut' render={statusRenderer} />
+      </SimpleShowLayout>
+    </>
   )
 }
 

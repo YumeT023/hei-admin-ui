@@ -33,22 +33,13 @@ export const mainTheme = createTheme({
             padding : "10px", 
             fontFamily: 'Arial, sans-serif',
             marginLeft: "5vh",
-            marginTop: "3vh",
             marginBottom: "3vh",
           },
           "& .RaSimpleShowLayout-row": {
             width: "12%",
             display: "inline-block",
           },
-          "& .MuiStack-root.ra-field.ra-field-first-name, .MuiStack-root.ra-field.ra-field-last-name": {
-            display: "inline-block",
-            width: "48%",
-            marginRight: "2%",
-          },
-          "& .MuiStack-root.ra-field.ra-field-birth-date, .MuiStack-root.ra-field.ra-field-address, .MuiStack-root.ra-field.ra-field-email, .MuiStack-root.ra-field.ra-field-entrance-date": {
-            width: "12%",
-            display: "inline-block",
-          },
+          
           "& .css-8l66u2-MuiStack-root-RaLabeled-root .RaLabeled-label": {
             fontFamily: "Quicksand",
             fontSize: "inherit",
@@ -86,6 +77,7 @@ export const mainTheme = createTheme({
           color : 'black',
         }
       }
-    }
+    },
+
   },
 });
