@@ -12,8 +12,8 @@ const transformTeacher = teacher => {
 const TeacherCreate = () => (
   <Create title='Enseignants' transform={transformTeacher}>
     <Form>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mt: '30px' }}>
-        <Box sx={{ ml: '150px' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mt: '30px',ml:'80px'}}>
+        <Box>
           <Input source='last_name' placeholder='Nom' />
           <Input source='first_name' placeholder='Prénoms' />
           <Input source='birth_date' placeholder='Date de naissance' type='date' />
