@@ -13,6 +13,7 @@ const TranscriptList = () => {
       perPage={pageSize}
       resource={'transcripts'}
       filterDefaultValues={{ studentId: studentId }}
+      title={'Relevés de notes'}
     >
       <Datagrid bulkActionButtons={false} rowClick={id => `/students/${studentId}/transcripts/${id}/show`}>
         <TextField source='semester' label='Semestre' />

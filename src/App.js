@@ -21,6 +21,7 @@ import studentGrades from './operations/studentGrades'
 
 import MyLayout from './HaLayout'
 import HaLoginPage from './security/LoginPage'
+import TranscriptVersionsShow from './operations/transcripts/transcriptVersionShow'
 
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
 const App = () => (
@@ -42,6 +43,8 @@ const App = () => (
 
     <Resource name='student-grades' {...studentGrades} />
     <Resource name='transcripts' {...transcripts} />
+    <Resource name='transcripts-versions' show={<TranscriptVersionsShow/>} />
+    <Resource name='claims' />
 
     <CustomRoutes>
       <Route exact path='/profile' element={<profile.show />} />
@@ -49,6 +52,8 @@ const App = () => (
       <Route exact path='/students/:studentId/fees' element={<fees.list />} />
       <Route exact path='/students/:studentId/transcripts' element={<transcripts.list />} />
       <Route exact path='/students/:studentId/transcripts/:transcriptId/show' element={<transcripts.show />} />
+      <Route exact path='/students/:studentId/transcripts/:transcriptId/versions/:versionId/show' element={<TranscriptVersionsShow />} />
+
       <Route
         exact
         path='/students/:studentId/fees/create'

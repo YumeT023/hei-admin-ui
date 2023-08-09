@@ -1,7 +1,8 @@
-import { Show, SimpleShowLayout, TextField, useShowContext, List, Datagrid } from 'react-admin'
+import { List, Show, SimpleShowLayout, TextField, useShowContext, Datagrid, EditButton, ShowButton } from 'react-admin'
 import { useEffect, useState } from 'react'
 import transcriptsVersionsProvider from '../../providers/transcriptsVersionsProvider'
 import { toApiIds } from '../../providers/transcriptsProvider'
+import claimsProvider from '../../providers/claimsProvider'
 
 
 // nb: notice how i separate this from the main Transcript details
@@ -11,54 +12,56 @@ const TranscriptVersions = () => {
   const [versions, setVersions] = useState([])
   const { record } = useShowContext()
   const { studentId, transcriptId } = toApiIds(record.id)
+  const [ dataToDisplay, setDataToDisplay ] = useState([])
 
-  useEffect(() => {
+ 
+
+  {
+    /*
+     useEffect(() => {
     const doFetch = async () => {
       const versionsData = await transcriptsVersionsProvider.getList(studentId, transcriptId, 1, 10)
-      setVersions(versionsData)
+      setDataToDisplay( versionsData.map(async (version) => (
+        {
+          ...version,
+          claims : await claimsProvider.getList(studentId, transcriptId, version.id)
+        }
+      )) )  
     }
     doFetch()
   }, [studentId, transcriptId])
+    */
+  }
 
   return (
-    <div>
-      {/*versions.length === 0 ? (
-        'Pas de données'
-      ) : (
-        <div>
-          {versions.map(record => (
-            <>
-              <span>{record.id}</span>
-              <span>{record.transcript_id}</span>
-              <span>{record.created_by_user_id}</span>
-            </>
-          ))}
-        </div>
-          )*/}
-
-              <List>
-              <Datagrid data={versions}>
-                <TextField source="id" />
-                <TextField source="transcript_id" />
-                <TextField source="created_by_user_id" />
-              </Datagrid>
-              </List>        
-
-    </div>
+    <List title={'Versions de relevé '} resource={'transcripts-versions'} filterDefaultValues={{studentId, transcriptId}}>
+       <Datagrid bulkActionButtons={false} rowClick={id => `/students/${studentId}/transcripts/${transcriptId}/versions/${id}`}>
+        <TextField source='creation_datetime' label='Date de création' />
+        <TextField source='ref' label='Référence' />
+        <TextField source='created_by_user_role' label='Créateur' />
+        <EditButton />
+        <ShowButton />
+      </Datagrid>   
+    </List>
   )
 }
 
+
 const TranscriptShow = () => {
   return (
-    <Show resource={'transcripts'} title={'Transcript'}>
+    <>
+    <Show resource={'transcripts'} title={' '}>
       <SimpleShowLayout>
         <TextField source={'semester'} label={'Semestre'} />
         <TextField source={'academic_year'} label={'Année académique'} />
         <TextField source={'creation_datetime'} label={'Date de création'} />
       </SimpleShowLayout>
-
       <TranscriptVersions />
+ 
     </Show>
+
+    </>
+    
   )
 }
 
