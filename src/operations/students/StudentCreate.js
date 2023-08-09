@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import { Create, Form } from 'react-admin'
 import { FeeSimpleFormContent } from '../fees/FeesCreate'
-import { SexRadioButton, TurnsStringIntoDate } from '../utils'
+import { SexRadioButton, TurnsStringIntoDate , Input, Save, BoolInput } from '../utils'
 import { createFees } from './utils'
-import Input from '../utils/Input'
 
 import { Box } from '@mui/material'
-import { BoolInput } from '../utils/BooleanCustom'
-import { Save } from '../utils/Save'
 
 const StudentCreate = props => {
   const [feesConf, setFeesConf] = useState([

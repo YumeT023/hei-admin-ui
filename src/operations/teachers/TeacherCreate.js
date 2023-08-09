@@ -1,9 +1,7 @@
-import { Create, Form, SaveButton } from 'react-admin'
-import { SexRadioButton, TurnsStringIntoDate } from '../utils'
-import Input from '../utils/Input'
+import { Create, Form } from 'react-admin'
+import { SexRadioButton, TurnsStringIntoDate , Save , Input} from '../utils'
 
 import { Box } from '@mui/material'
-import { Save } from '../utils/Save'
 
 const transformTeacher = teacher => {
   teacher.entrance_datetime = TurnsStringIntoDate(teacher.entrance_datetime)

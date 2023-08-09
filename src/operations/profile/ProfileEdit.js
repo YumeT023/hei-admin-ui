@@ -1,10 +1,8 @@
-import { Form, RadioButtonGroupInput, Edit, SaveButton, Toolbar } from 'react-admin'
+import { Form, RadioButtonGroupInput, Edit  } from 'react-admin'
 
-import { SexRadioButton, EditToolBar, TurnsStringIntoDate } from '../utils'
-import Input from '../utils/Input'
+import { SexRadioButton, EditToolBar, TurnsStringIntoDate , Save , Input } from '../utils'
 
 import { Box } from '@mui/material'
-import { Save } from '../utils/Save'
 
 const StatusRadioButton = () => (
   <RadioButtonGroupInput
@@ -14,6 +12,14 @@ const StatusRadioButton = () => (
       { id: 'ENABLED', name: 'Actif·ve' },
       { id: 'DISABLED', name: 'Inactif·ve' }
     ]}
+    sx={{
+      '& .css-pqqtcc-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
+        color: '#F8BF4F'
+      },
+      '& .css-pqqtcc-MuiButtonBase-root-MuiRadio-root': {
+        color: '#FDEAC4'
+      }
+    }}
   />
 )
 
@@ -35,6 +41,7 @@ const ProfileEdit = () => (
           <Input source='birth_date' label='' placeholder='Date de naissance' type='date' />
           <Input multiline source='address' placeholder='Adresse' />
           <SexRadioButton />
+          
         </Box>
 
         <Box sx={{ ml: '70px' }}>
@@ -43,9 +50,10 @@ const ProfileEdit = () => (
           <Input source='entrance_datetime' label='' placeholder="Date d'entrée chez HEI" type='date' />
           <Input source='ref' placeholder='Référence' />
           <StatusRadioButton />
-          <Save />
+          <Box><Save /></Box>
         </Box>
       </Box>
+      
     </Form>
   </Edit>
 )

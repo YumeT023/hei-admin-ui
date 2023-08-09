@@ -1,7 +1,7 @@
 import { TextInput } from 'react-admin'
 import { Box, Typography } from '@mui/material'
 
-const Input = props => {
+export const Input = props => {
   const { source, placeholder, type, name, disabled, validate } = props
 
   return (
@@ -29,4 +29,3 @@ const Input = props => {
   )
 }
 
-export default Input
