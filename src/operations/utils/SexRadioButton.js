@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 export const SexRadioButton = () => {
   return (
     <>
-      <Typography sx={{ fontWeight: 'bold' }}>Sexe</Typography>
+      <Typography sx={{ fontWeight: 'bold' , fontSize:'15px' }}>Sexe</Typography>
       <RadioButtonGroupInput
         source='sex'
         label=''
