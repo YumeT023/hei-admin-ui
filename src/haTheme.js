@@ -50,7 +50,7 @@ export const mainTheme = createTheme({
             display: "inline-block",
           },
           "& .css-8l66u2-MuiStack-root-RaLabeled-root .RaLabeled-label": {
-            fontFamily: "fantasy",
+            fontFamily: "Quicksand",
             fontSize: "inherit",
             color: "#001948", 
           },
@@ -65,7 +65,7 @@ export const mainTheme = createTheme({
       styleOverrides: {
         root:{
           "& .RaLayout-content": {
-            backgroundColor : "#ECF2F8",
+            backgroundColor : "rgb(247,249,252)",
           }
         }
       }
