@@ -10,9 +10,9 @@ const transformTeacher = teacher => {
   return teacher
 }
 const TeacherCreate = () => (
-  <Create title='Enseignants' transform={transformTeacher}>
+  <Create title='Enseignants' transform={transformTeacher} sx={{boxShadow:'none',height:'100vh'}}>
     <Form>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mt: '30px',ml:'80px'}}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mt: '30px',ml:'200px'}}>
         <Box>
           <Input source='last_name' placeholder='Nom' />
           <Input source='first_name' placeholder='Prénoms' />
@@ -20,7 +20,7 @@ const TeacherCreate = () => (
           <Input multiline source='address' placeholder='Adresse' />
           <SexRadioButton />
         </Box>
-        <Box sx={{ ml: '70px' }}>
+        <Box sx={{ ml: '100px' }}>
           <Input source='ref' placeholder='Référence' />
 
           <Input source='phone' placeholder='Téléphone' />
