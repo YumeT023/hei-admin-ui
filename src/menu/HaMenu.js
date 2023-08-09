@@ -3,25 +3,41 @@ import StudentMenu from './StudentMenu'
 import ManagerMenu from './ManagerMenu'
 import TeacherMenu from './TeacherMenu'
 import { WhoamiRoleEnum } from '../gen/haClient'
-import { Box, Stack, Button, Avatar, Typography } from '@mui/material'
-import { MultiLevelMenu as RaMenu } from '@react-admin/ra-navigation'
-import { Logout as LogoutIcon } from '@mui/icons-material'
+import { Box, Stack, IconButton, Avatar, Typography } from '@mui/material'
+import { MultiLevelMenu as RaMenu, MenuItemCategory as Item } from '@react-admin/ra-navigation'
+import { LogoutOutlined } from '@mui/icons-material'
+import { Color } from '../utils/color'
 
-export const alpha = alpha => `rgb(240, 164, 8, ${alpha})`
+const Logout = () => {
+  const doLogout = async () => {
+    await authProvider.logout()
+    window.location.reload()
+  }
 
-// TODO: find a better place where to put this
-const Logout = () => (
-  <Box sx={{ textAlign: 'center', color: 'white', pb: '20px' }}>
-    <Button variant='text' endIcon={<LogoutIcon />} sx={{ color: 'white' }} onClick={authProvider.logout}>
-      Se déconnecter
-    </Button>
-  </Box>
-)
+  return (
+    <IconButton
+      onClick={doLogout}
+      size='small'
+      title='Se déconnecter'
+      sx={{
+        borderRadius: '4px',
+        color: Color['500'],
+        bgcolor: Color['100'],
+        '&:hover': { bgcolor: Color['100'] }
+      }}
+    >
+      <LogoutOutlined />
+    </IconButton>
+  )
+}
 
 const HaMenuHeader = () => (
   <Stack direction='row' alignItems='center' gap={1.5}>
-    <Avatar variant='rounded' sx={{ bgcolor: 'rgb(252, 175, 59)' }} />
-    <Typography component='b'>HEI Admin</Typography>
+    <Avatar variant='rounded' sx={{ bgcolor: Color['500'] }} />
+    <Typography component='b' flex={1}>
+      HEI Admin
+    </Typography>
+    <Logout />
   </Stack>
 )
 
@@ -35,7 +51,7 @@ export const HaMenuListContainer = ({ children }) => (
         padding: '0 !important',
         bgcolor: 'transparent',
         '& span': {
-          fontWeight: '700',
+          fontWeight: '500',
           fontSize: '14px'
         }
       },
@@ -46,8 +62,8 @@ export const HaMenuListContainer = ({ children }) => (
         borderRadius: '6px',
         width: '100%',
         '&.active, &:hover': {
-          bgcolor: '#FDEAC4',
-          color: '#F8BF4F'
+          bgcolor: Color['100'],
+          color: Color['500']
         }
       }
     }}

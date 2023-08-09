@@ -16,7 +16,7 @@ import teachers from './operations/teachers'
 
 import fees from './operations/fees'
 import payments from './operations/payments'
-
+import transcripts from './operations/transcripts'
 import studentGrades from './operations/studentGrades'
 
 import MyLayout from './HaLayout'
@@ -44,6 +44,7 @@ const App = () => (
     <Resource name='payments' {...payments} />
     <Resource name='notes' {...Transcript}/>
     <Resource name='student-grades' {...studentGrades} />
+    <Resource name='transcripts' {...transcripts} />
 
     <CustomRoutes>
       <Route exact path='/profile' element={<profile.show />} />
