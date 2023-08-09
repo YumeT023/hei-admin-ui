@@ -16,7 +16,7 @@ const Input = props => {
         name={name}
         disabled={disabled}
         validate={validate}
-        sx={{ width: '500px', height: '50px' , 
+        sx={{ width: '300px', height: '50px' , 
       '& .css-146qo9o-MuiInputBase-root-MuiOutlinedInput-root':{
         height:'40px'
       },
