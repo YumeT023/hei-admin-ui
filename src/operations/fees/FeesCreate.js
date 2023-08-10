@@ -3,8 +3,10 @@ import { Create, maxValue, minValue, number, RadioButtonGroupInput, SelectInput,
 import { useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { manualFeeTypes, predefinedFeeTypes, predefinedFirstDueDates } from '../../conf'
-import { Input, commentRenderer, BoolInput } from '../utils'
+import { commentRenderer , Input } from '../utils'
+
 import { Box, Typography } from '@mui/material'
+import { BoolInput } from '../utils/BooleanCustom'
 
 const commonStyleSelect = {
   width: '50px',
