@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
-import { Show, SimpleShowLayout, TextField, useShowContext } from 'react-admin'
-import { Stack, Box, Typography, TextField as MuiTextField, Button } from '@mui/material'
+import { Show, SimpleShowLayout, TextField, useNotify, useShowContext } from 'react-admin'
+import { Stack, Box, TextField as MuiTextField, Button, Select, MenuItem } from '@mui/material'
 import { toApiIds } from '../../providers/transcriptsProvider'
 import { Color } from '../../utils/color'
 import { transcriptApi } from '../../providers/api'
@@ -8,30 +8,45 @@ import { v4 as uuid } from 'uuid'
 import { useForm } from 'react-hook-form'
 
 const TranscriptClaim = ({ claim, studentId }) => {
+  const notify = useNotify()
   const { register, handleSubmit } = useForm({
     defaultValues: {
       ...claim
     }
   })
 
-  const updateClaim = async values => {
+  const update = async values => {
     try {
       await transcriptApi().putStudentClaimsOfTranscriptVersion(studentId, values.transcript_id, values.transcript_version_id, values.id, values)
+      notify(`Réclamation ${claim.id} mise à jour`, { type: 'success' })
     } catch (e) {
       console.log('error', e)
     }
   }
 
   return (
-    <li key={claim.id}>
-      <Typography>{claim.reason}</Typography>
-      <input {...register('reason')} />
-      <select {...register('status')}>
-        <option value='OPEN'>OPEN</option>
-        <option value='CLOSE'>CLOSE</option>
-      </select>
-      <button onClick={handleSubmit(updateClaim)}>Mettre à jour</button>
-    </li>
+    <Stack alignItems='center' direction='row' justifyContent='space-between'>
+      <MuiTextField variant='outlined' {...register('reason')} />
+      <Select {...register('status')} size='small'>
+        <MenuItem value='OPEN'>OPEN</MenuItem>
+        <MenuItem value='CLOSE'>CLOSE</MenuItem>
+      </Select>
+      <Button
+        onClick={handleSubmit(update)}
+        sx={{
+          mt: '0.5rem',
+          display: 'block',
+          bgcolor: Color['100'],
+          color: Color['500'],
+          '&:hover': {
+            bgcolor: '#FDEAC4',
+            boxShadow: 'none'
+          }
+        }}
+      >
+        confirmer
+      </Button>
+    </Stack>
   )
 }
 
@@ -40,6 +55,7 @@ const TranscriptClaim = ({ claim, studentId }) => {
 // but the responsibilities is also well defined
 const TranscriptVersionsView = () => {
   const [claims, setClaims] = useState([])
+  const notify = useNotify()
   const { record } = useShowContext()
   const { studentId, transcriptId } = toApiIds(record.id)
   const claimInputRef = useRef(null)
@@ -67,6 +83,7 @@ const TranscriptVersionsView = () => {
           creation_datetime: new Date().toISOString()
         }
         await transcriptApi().putStudentClaimsOfTranscriptVersion(studentId, transcriptId, tsVersionId, id, studentTsClaim)
+        notify('Réclamation soumis avec succès', { type: 'success' })
         claimInputRef.current.value = ''
       } catch (e) {
         console.warn('error', e)
@@ -97,10 +114,14 @@ const TranscriptVersionsView = () => {
         </form>
       </Box>
 
-      <Box sx={{ flex: 1, bgcolor: 'red' }}>
-        <ul>
+      <Box sx={{ flex: 1 }}>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           {claims.map(claim => {
-            return <TranscriptClaim key={claim.id} claim={claim} studentId={studentId} />
+            return (
+              <li key={claim.id}>
+                <TranscriptClaim key={claim.id} claim={claim} studentId={studentId} />
+              </li>
+            )
           })}
         </ul>
       </Box>
