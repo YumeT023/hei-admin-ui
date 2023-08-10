@@ -1,5 +1,5 @@
 import { Breadcrumb, BreadcrumbItem } from '@react-admin/ra-navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Color } from './utils/color'
 import dataProvider from './providers/dataProvider'
 import { useRecordContext } from 'react-admin'
@@ -25,21 +25,21 @@ const sxProps = {
 }
 
 export const MyBreadcrumb = () => {
-  const [displayLabel, setDisplayLabel] = useState('')
+  const [label, setLabel] = useState('')
 
-  const queryLabel = ({ record }, key = 'ref') => {
-    let label = record[key]
+  const queryLabel = ({ record }) => {
+    if (!record) return '...'
 
-    ;(async () => {
-      // if it has no ref, it is likely a fee record
-      // fetch the associated student
-      if (!label) {
-        const { student_id } = record
-        label = (await dataProvider.getOne('students', { id: student_id })).data.ref
-      }
-      setDisplayLabel(label)
-    })()
-    return displayLabel
+    if (record.ref) return record.ref
+
+    // /!\ It is likely a fee so we fetch the student associated with that fees then take his ref
+    const doFetch = async () => {
+      const student = await dataProvider.getOne('students', { id: record.student_id })
+      setLabel(student.data.ref)
+    }
+    doFetch()
+
+    return label
   }
 
   return (
