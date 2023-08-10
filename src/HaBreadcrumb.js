@@ -23,7 +23,7 @@ const sxProps = {
   }
 }
 
-export const MyBreadcrumb = () => {
+export const HaBreadcrumb = () => {
   const [label, setLabel] = useState('')
 
   function queryLabel({ record }, key = 'ref') {
@@ -59,7 +59,7 @@ export const MyBreadcrumb = () => {
         <BreadcrumbItem name='create' label='Créer' />
       </BreadcrumbItem>
       <BreadcrumbItem name='transcripts' label='Relevé'>
-        <BreadcrumbItem name='show' label={(record) => queryLabel(record, 'id')} />
+        <BreadcrumbItem name='show' label={record => queryLabel(record, 'id')} />
       </BreadcrumbItem>
       <BreadcrumbItem name='profile' label='Profile' />
     </Breadcrumb>
