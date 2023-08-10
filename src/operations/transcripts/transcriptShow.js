@@ -1,58 +1,39 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { Show, SimpleShowLayout, TextField, useNotify, useShowContext } from 'react-admin'
-import { Stack, Box, TextField as MuiTextField, Button, Typography, Chip } from '@mui/material'
+import { Stack, Box, TextField as MuiTextField, Button, Typography, Chip, Dialog } from '@mui/material'
 import { toApiIds } from '../../providers/transcriptsProvider'
 import { Color } from '../../utils/color'
 import { transcriptApi } from '../../providers/api'
 import { v4 as uuid } from 'uuid'
-import { useForm } from 'react-hook-form'
 
-const renderClaimStatus = status => {
-  const bgcolor = status === 'OPEN' ? '#149334' : '#B71816'
-  return <Chip label={status.toLowerCase()} sx={{ color: 'white', bgcolor }} size='small' />
+const renderClaimStatus = (status) => {
+  const bgcolor = status === "OPEN" ? "#149334" : "#B71816";
+  return <Chip label={status.toLowerCase()} sx={{ m: 2, color: 'white', bgcolor }} size="small" />
 }
 
-const TranscriptClaim = ({ claim, studentId }) => {
-  const notify = useNotify()
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      ...claim
-    }
-  })
-
-  console.log('res', claim)
-
-  const update = async values => {
-    try {
-      await transcriptApi().putStudentClaimsOfTranscriptVersion(studentId, values.transcript_id, values.transcript_version_id, values.id, values)
-      notify(`Réclamation ${claim.id} mise à jour`, { type: 'success' })
-    } catch (e) {
-      console.log('error', e)
-    }
-  }
-
+const TranscriptClaim = ({ claim }) => {
   /*
-   *
-      // <MuiTextField variant='outlined' {...register('reason')} />
-      // <Select {...register('status')} size='small'>
-      //   <MenuItem value='OPEN'>OPEN</MenuItem>
-      //   <MenuItem value='CLOSE'>CLOSE</MenuItem>
-      // </Select>
-      // <Button
-      //   onClick={handleSubmit(update)}
-      //   sx={{
-      //     mt: '0.5rem',
-      //     display: 'block',
-      //     bgcolor: Color['100'],
-      //     color: Color['500'],
-      //     '&:hover': {
-      //       bgcolor: '#FDEAC4',
-      //       boxShadow: 'none'
-      //     }
-      //   }}
-      // >
-      //   confirmer
-      // </Button>
+   * TODO: update claim
+   * <MuiTextField variant='outlined' {...register('reason')} />
+   * <Select {...register('status')} size='small'>
+   *   <MenuItem value='OPEN'>OPEN</MenuItem>
+   *   <MenuItem value='CLOSE'>CLOSE</MenuItem>
+   * </Select>
+   * <Button
+   *   onClick={handleSubmit(update)}
+   *   sx={{
+   *     mt: '0.5rem',
+   *     display: 'block',
+   *     bgcolor: Color['100'],
+   *     color: Color['500'],
+   *     '&:hover': {
+   *       bgcolor: '#FDEAC4',
+   *       boxShadow: 'none'
+   *     }
+   *   }}
+   * >
+   *   confirmer
+   * </Button>
    * */
   return (
     <Stack alignItems='center' direction='row' justifyContent='space-between' my={1}>
@@ -78,7 +59,7 @@ const TranscriptVersionsView = () => {
   }, [setClaims, studentId, transcriptId])
 
   useEffect(() => {
-    getTranscriptClaims()
+    getTranscriptClaims();
   }, [transcriptId, studentId, getTranscriptClaims])
 
   const submitClaim = async ev => {
@@ -98,7 +79,7 @@ const TranscriptVersionsView = () => {
         await transcriptApi().putStudentClaimsOfTranscriptVersion(studentId, transcriptId, tsVersionId, id, studentTsClaim)
         notify('Réclamation soumis avec succès', { type: 'success' })
         claimInputRef.current.value = ''
-        getTranscriptClaims()
+        getTranscriptClaims();
       } catch (e) {
         console.warn('error', e)
       }
@@ -109,7 +90,7 @@ const TranscriptVersionsView = () => {
     <Stack direction='row' justifyContent='space-between' border='1px solid #f4f4f4' mt={1} p={3} h='auto' spacing={2}>
       <Box sx={{ width: '50%' }}>
         <form onSubmit={submitClaim}>
-          <MuiTextField variant='outlined' size='small' placeholder='reason' inputRef={claimInputRef} />
+          <MuiTextField variant='outlined' size='small' placeholder='Raison' inputRef={claimInputRef} />
           <Button
             type='submit'
             sx={{
@@ -123,22 +104,22 @@ const TranscriptVersionsView = () => {
               }
             }}
           >
-            Submit claim
+            Soumettre
           </Button>
         </form>
       </Box>
 
-      <Box sx={{ flex: 1 }}>
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-          {claims.map(claim => {
-            return (
-              <li key={claim.id}>
-                <TranscriptClaim key={claim.id} claim={claim} studentId={studentId} />
-              </li>
-            )
-          })}
-        </ul>
+      <Box sx={{ flex: 1, overflowY: 'scroll', maxHeight: '25rem' }}>
+        {claims.map(claim => {
+          return (
+            <TranscriptClaim key={claim.id} />
+          )
+        })}
       </Box>
+
+      <Dialog open={true}>
+        <MuiTextField variant='outlined' size='small' placeholder='Raison' inputRef={claimInputRef} />
+      </Dialog>
     </Stack>
   )
 }
