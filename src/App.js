@@ -22,6 +22,7 @@ import studentGrades from './operations/studentGrades'
 import MyLayout from './HaLayout'
 import HaLoginPage from './security/LoginPage'
 import { mainTheme } from './haTheme'
+import { Transcript } from './operations/TranscriptList'
 import TranscriptVersionsShow from './operations/transcripts/transcriptVersionShow'
 
 const FeeCreate = React.lazy(() => import('./operations/fees/FeesCreate'))
@@ -34,8 +35,8 @@ const App = () => (
     i18nProvider={polyglotI18nProvider(() => frenchMessages, 'fr')}
     loginPage={HaLoginPage}
     layout={MyLayout}
-    requireAuth
     theme={mainTheme}
+    requireAuth
   >
     <Resource name='profile' />
     <Resource name='students' {...students} />
@@ -43,7 +44,7 @@ const App = () => (
 
     <Resource name='fees' {...fees} />
     <Resource name='payments' {...payments} />
-
+    <Resource name='notes' {...Transcript}/>
     <Resource name='student-grades' {...studentGrades} />
     <Resource name='transcripts' {...transcripts} />
     <Resource name='transcripts-versions' show={<TranscriptVersionsShow/>} />
@@ -51,6 +52,7 @@ const App = () => (
 
     <CustomRoutes>
       <Route exact path='/profile' element={<profile.show />} />
+      <Route exact path='/notes' element={<Transcript.list />} />
 
       <Route exact path='/students/:studentId/fees' element={<fees.list />} />
       <Route exact path='/students/:studentId/transcripts' element={<transcripts.list />} />
