@@ -56,6 +56,7 @@ const TranscriptVersionsView = () => {
   const getTranscriptClaims = useCallback(async () => {
     const res = await transcriptApi().getStudentTranscriptClaims(studentId, transcriptId, 'versionId')
     setClaims(res.data)
+    console.info('claims', res.data);
   }, [setClaims, studentId, transcriptId])
 
   useEffect(() => {
@@ -110,16 +111,8 @@ const TranscriptVersionsView = () => {
       </Box>
 
       <Box sx={{ flex: 1, overflowY: 'scroll', maxHeight: '25rem' }}>
-        {claims.map(claim => {
-          return (
-            <TranscriptClaim key={claim.id} />
-          )
-        })}
+        {claims.map(claim => <TranscriptClaim key={claim.id} claim={claim} />)}
       </Box>
-
-      <Dialog open={true}>
-        <MuiTextField variant='outlined' size='small' placeholder='Raison' inputRef={claimInputRef} />
-      </Dialog>
     </Stack>
   )
 }

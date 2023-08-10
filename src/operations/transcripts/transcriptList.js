@@ -4,9 +4,7 @@ import { pageSize, PrevNextPagination } from '../utils'
 import { useParams } from 'react-router-dom'
 
 const TranscriptList = () => {
-
-  const params = useParams()
-  const studentId = params.studentId
+  const { studentId } = useParams()
   return (
     <List
       filters={profileFilters}
