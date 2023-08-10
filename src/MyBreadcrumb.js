@@ -1,8 +1,7 @@
 import { Breadcrumb, BreadcrumbItem } from '@react-admin/ra-navigation'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { Color } from './utils/color'
 import dataProvider from './providers/dataProvider'
-import { useRecordContext } from 'react-admin'
 
 const sxProps = {
   bgcolor: Color['500'],
@@ -27,15 +26,15 @@ const sxProps = {
 export const MyBreadcrumb = () => {
   const [label, setLabel] = useState('')
 
-  const queryLabel = ({ record }) => {
+  function queryLabel({ record }, key = 'ref') {
     if (!record) return '...'
 
-    if (record.ref) return record.ref
+    if (record[key]) return record[key]
 
     // /!\ It is likely a fee so we fetch the student associated with that fees then take his ref
     const doFetch = async () => {
       const student = await dataProvider.getOne('students', { id: record.student_id })
-      setLabel(student.data.ref)
+      setLabel(student.data[key])
     }
     doFetch()
 
@@ -58,6 +57,9 @@ export const MyBreadcrumb = () => {
         <BreadcrumbItem name='edit' label={queryLabel} />
         <BreadcrumbItem name='show' label={queryLabel} />
         <BreadcrumbItem name='create' label='Créer' />
+      </BreadcrumbItem>
+      <BreadcrumbItem name='transcripts' label='Relevé'>
+        <BreadcrumbItem name='show' label={(record) => queryLabel(record, 'id')} />
       </BreadcrumbItem>
       <BreadcrumbItem name='profile' label='Profile' />
     </Breadcrumb>
