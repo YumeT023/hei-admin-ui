@@ -5,6 +5,35 @@ import { toApiIds } from '../../providers/transcriptsProvider'
 import { Color } from '../../utils/color'
 import { transcriptApi } from '../../providers/api'
 import { v4 as uuid } from 'uuid'
+import { useForm } from 'react-hook-form'
+
+const TranscriptClaim = ({ claim, studentId }) => {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      ...claim
+    }
+  })
+
+  const updateClaim = async values => {
+    try {
+      await transcriptApi().putStudentClaimsOfTranscriptVersion(studentId, values.transcript_id, values.transcript_version_id, values.id, values)
+    } catch (e) {
+      console.log('error', e)
+    }
+  }
+
+  return (
+    <li key={claim.id}>
+      <Typography>{claim.reason}</Typography>
+      <input {...register('reason')} />
+      <select {...register('status')}>
+        <option value='OPEN'>OPEN</option>
+        <option value='CLOSE'>CLOSE</option>
+      </select>
+      <button onClick={handleSubmit(updateClaim)}>Mettre à jour</button>
+    </li>
+  )
+}
 
 // nb: notice how i separate this from the main Transcript details
 // not only i can access the ShowContext (which contains the record, ... everything)
@@ -14,15 +43,6 @@ const TranscriptVersionsView = () => {
   const { record } = useShowContext()
   const { studentId, transcriptId } = toApiIds(record.id)
   const claimInputRef = useRef(null)
-
-  console.log('student', studentId)
-  console.log('transcript', transcriptId)
-
-  useEffect(() => {
-    if (claims.length) {
-      console.log('claim', claims)
-    }
-  }, [claims])
 
   useEffect(() => {
     const doFetch = async () => {
@@ -78,14 +98,11 @@ const TranscriptVersionsView = () => {
       </Box>
 
       <Box sx={{ flex: 1, bgcolor: 'red' }}>
-        {claims.map((claim, id) => {
-          return (
-            <Box sx={{ height: '2rem' }} key={claim.id}>
-              <Typography>{claim.reason}</Typography>
-              <Typography>{claim.status}</Typography>
-            </Box>
-          )
-        })}
+        <ul>
+          {claims.map(claim => {
+            return <TranscriptClaim key={claim.id} claim={claim} studentId={studentId} />
+          })}
+        </ul>
       </Box>
     </Stack>
   )
