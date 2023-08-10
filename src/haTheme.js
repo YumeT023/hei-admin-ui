@@ -71,15 +71,25 @@ export const mainTheme = createTheme({
             backgroundColor: "#ebebeb !important"
           },
           '& .RaLayout-content': {
-            backgroundColor: "#ebebeb !important"
+            backgroundColor: "#ebebeb !important",
+            marginTop: 0
+          },
+          '& .RaLayout-content': {
+            gap: 5
           }
         }
       }
     },
-    sidebar: {
-      width: 200,
-      closedWidth: 1
+    RaCreate: {
+      styleOverrides: {
+        root:{
+           '& .RaCreate-card':{
+            height:'100vh',
+            boxShadow:'none',
+            border:'1px solid #f7f7f7'
+           }
+        }
+      }
     },
-    //shadows: Array(25).fill('none')
   }
 })
